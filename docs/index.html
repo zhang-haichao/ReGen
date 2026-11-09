@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Controllable Generative Recommendation via Guided Token Refinement</title>
+    <meta name="description" content="ReGen enables training-free, real-time control of generative recommendation through guided parallel token refinement and topology-constrained inference.">
+    <meta name="keywords" content="Recommender Systems, Generative Recommendation, Controllable Recommendation, Diversity in Recommendation">
+    <meta name="author" content="Haichao Zhang, Zhixuan Liang, Chong Zhang, Zixi Chen, Wen Wang, Jia Wang">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="canonical" href="https://zhang-haichao.github.io/ReGen/">
+    <link rel="icon" href="./static/images/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/site.css">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="ReGen at ICDM 2026">
+    <meta property="og:title" content="Controllable Generative Recommendation via Guided Token Refinement">
+    <meta property="og:description" content="Training-free, real-time control of generative recommendation through guided parallel token refinement and topology-constrained inference.">
+    <meta property="og:url" content="https://zhang-haichao.github.io/ReGen/">
+    <meta property="og:image" content="https://zhang-haichao.github.io/ReGen/static/images/video-poster.png">
+    <meta property="og:image:width" content="1920">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Title slide for Controllable Generative Recommendation via Guided Token Refinement">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "Controllable Generative Recommendation via Guided Token Refinement",
+        "description": "ReGen enables training-free, real-time control of generative recommendation through guided parallel token refinement and topology-constrained inference.",
+        "url": "https://zhang-haichao.github.io/ReGen/",
+        "image": "https://zhang-haichao.github.io/ReGen/static/images/video-poster.png",
+        "datePublished": "2026",
+        "inLanguage": ["en", "zh-CN"],
+        "isPartOf": {
+          "@type": "PublicationEvent",
+          "name": "2026 IEEE International Conference on Data Mining (ICDM)"
+        },
+        "author": [
+          {"@type": "Person", "name": "Haichao Zhang"},
+          {"@type": "Person", "name": "Zhixuan Liang"},
+          {"@type": "Person", "name": "Chong Zhang"},
+          {"@type": "Person", "name": "Zixi Chen"},
+          {"@type": "Person", "name": "Wen Wang"},
+          {"@type": "Person", "name": "Jia Wang"}
+        ],
+        "keywords": [
+          "Recommender Systems",
+          "Generative Recommendation",
+          "Controllable Recommendation",
+          "Diversity in Recommendation"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="nav-shell">
+        <a class="brand" href="#top" aria-label="ReGen home">ReGen</a>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <span></span><span></span><span></span>
+          <span class="sr-only">Open navigation</span>
+        </button>
+
+        <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+          <a href="#abstract" data-nav-link>
+            <span data-lang-label="en">Abstract</span><span data-lang-label="zh" hidden>摘要</span>
+          </a>
+          <a href="#contributions" data-nav-link>
+            <span data-lang-label="en">Contributions</span><span data-lang-label="zh" hidden>贡献</span>
+          </a>
+          <a href="#method" data-nav-link>
+            <span data-lang-label="en">Method</span><span data-lang-label="zh" hidden>方法</span>
+          </a>
+          <a href="#experiments" data-nav-link>
+            <span data-lang-label="en">Experiments</span><span data-lang-label="zh" hidden>实验</span>
+          </a>
+          <a href="#presentation" data-nav-link>
+            <span data-lang-label="en">Presentation</span><span data-lang-label="zh" hidden>报告</span>
+          </a>
+          <a href="#citation" data-nav-link>BibTeX</a>
+          <div class="language-switch" role="group" aria-label="Language">
+            <button type="button" data-language="en" aria-pressed="true">EN</button>
+            <button type="button" data-language="zh" aria-pressed="false">中文</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="publication-header" id="top">
+        <div class="content-shell publication-content">
+          <p class="venue">IEEE International Conference on Data Mining (ICDM), 2026</p>
+          <h1>Controllable Generative Recommendation via Guided Token Refinement</h1>
+
+          <div class="authors" role="group" aria-label="Paper authors">
+            <a href="https://zhanghaichao.loc.cc/" target="_blank" rel="noopener">Haichao Zhang<sup>1,2</sup></a>
+            <span>Zhixuan Liang<sup>3</sup></span>
+            <span>Chong Zhang<sup>1,2</sup></span>
+            <span>Zixi Chen<sup>1</sup></span>
+            <span>Wen Wang<sup>1</sup></span>
+            <span>Jia Wang<sup>1,2,&dagger;</sup></span>
+          </div>
+
+          <div class="affiliations">
+            <p><sup>1</sup>Xi'an Jiaotong-Liverpool University, China</p>
+            <p><sup>2</sup>University of Liverpool, United Kingdom</p>
+            <p><sup>3</sup>The Hong Kong Polytechnic University, Hong Kong SAR, China</p>
+            <p><sup>&dagger;</sup><span data-lang-label="en">Corresponding author</span><span data-lang-label="zh" hidden>通讯作者</span></p>
+          </div>
+
+          <div class="resource-links" role="group" aria-label="Paper resources">
+            <a class="resource-link primary" href="./static/files/regen-icdm-2026.pdf" target="_blank" rel="noopener">
+              <span data-lang-label="en">Paper</span><span data-lang-label="zh" hidden>论文</span>
+            </a>
+            <a class="resource-link" href="https://github.com/zhang-haichao/ReGen" target="_blank" rel="noopener">
+              <span data-lang-label="en">Code</span><span data-lang-label="zh" hidden>代码</span>
+            </a>
+            <a class="resource-link" href="./static/files/regen-icdm-2026-slides.pptx" download>
+              <span data-lang-label="en">Slides</span><span data-lang-label="zh" hidden>幻灯片</span>
+            </a>
+            <a class="resource-link" href="#presentation">
+              <span data-lang-label="en">Video</span><span data-lang-label="zh" hidden>视频</span>
+            </a>
+            <a class="resource-link" href="./static/files/regen-icdm-2026-poster.pdf" target="_blank" rel="noopener">
+              <span data-lang-label="en">Poster</span><span data-lang-label="zh" hidden>海报</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section" id="presentation">
+        <div class="content-shell">
+          <div class="section-title">
+            <h2><span data-lang-label="en">Presentation</span><span data-lang-label="zh" hidden>论文报告</span></h2>
+            <p data-lang-content="en">A 15-minute presentation of the motivation, ReGen framework, and experimental results.</p>
+            <p data-lang-content="zh" hidden>一段约 15 分钟的论文报告，介绍研究动机、ReGen 框架与实验结果。</p>
+          </div>
+          <div class="video-frame">
+            <video controls playsinline preload="metadata" poster="./static/images/video-poster.png" aria-label="ReGen paper presentation video">
+              <source src="./static/media/regen-presentation.mp4" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
+          </div>
+          <p class="media-links">
+            <a href="./static/media/regen-presentation.mp4" download>
+              <span data-lang-label="en">Download video</span><span data-lang-label="zh" hidden>下载视频</span>
+            </a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="./static/files/regen-icdm-2026-slides.pptx" download>
+              <span data-lang-label="en">Download slides</span><span data-lang-label="zh" hidden>下载幻灯片</span>
+            </a>
+            <span aria-hidden="true">&middot;</span>
+            <a href="./static/files/regen-icdm-2026-poster.pdf" target="_blank" rel="noopener">
+              <span data-lang-label="en">View poster</span><span data-lang-label="zh" hidden>查看海报</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <section class="paper-section section-alt" id="abstract">
+        <div class="text-shell">
+          <h2><span data-lang-label="en">Abstract</span><span data-lang-label="zh" hidden>摘要</span></h2>
+          <div data-lang-content="en">
+            <p>Generative recommendation over discrete Semantic IDs has become a powerful paradigm for item retrieval. Real-world systems, however, frequently require real-time controllability to balance accuracy against objectives such as diversity. Existing autoregressive methods generate tokens strictly from left to right. This fixed direction locks in early decisions, preventing holistic planning and making control difficult. Consequently, direct interventions often break the semantic structure, producing non-existent items.</p>
+            <p>To address this, we propose <strong>ReGen</strong>, a framework that shifts from sequential decoding to <em>parallel iterative refinement</em>. ReGen reformulates generation as a <em>mask-filling</em> task, predicting all tokens simultaneously rather than one by one. This global view allows us to apply control signals directly to tokens with high-level semantics without retraining the model. To ensure that decoded candidates map to real items, we introduce a topology-constrained tree that iteratively corrects low-confidence predictions while strictly enforcing valid codebook paths during beam-based inference. Experiments show that ReGen provides a favorable accuracy-diversity trade-off under moderate guidance while maintaining high validity of generated Semantic IDs. The source code is available on <a href="https://github.com/zhang-haichao/ReGen" target="_blank" rel="noopener">GitHub</a>.</p>
+          </div>
+          <div data-lang-content="zh" hidden>
+            <p>基于离散语义 ID 的生成式推荐已成为物品检索的重要范式。然而，真实系统往往需要实时调节生成行为，在准确性与多样性等目标之间取得平衡。现有自回归方法严格按照从左到右的顺序生成 token，早期决策会锁定后续预测，使整体规划和即时控制变得困难。因此，直接干预常会破坏语义结构，产生无法映射到真实物品的 ID。</p>
+            <p>为此，我们提出 <strong>ReGen</strong>，将序列解码转化为<em>并行迭代细化</em>。ReGen 把生成过程建模为掩码填充任务，同时预测全部 token，并在无需重新训练模型的情况下将控制信号直接施加到具有高层语义的 token 上。为确保解码结果对应真实物品，我们进一步引入拓扑约束树，在基于 beam 的推理过程中迭代修正低置信度预测，并严格限制生成路径落在有效码本拓扑中。实验表明，在适度引导下，ReGen 能取得良好的准确性-多样性权衡，同时保持较高的语义 ID 有效率。源代码已发布于 <a href="https://github.com/zhang-haichao/ReGen" target="_blank" rel="noopener">GitHub</a>。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section" id="contributions">
+        <div class="text-shell">
+          <h2><span data-lang-label="en">Key Contributions</span><span data-lang-label="zh" hidden>主要贡献</span></h2>
+          <ul class="contribution-list" data-lang-content="en">
+            <li><strong>Parallel controllable generation.</strong> ReGen replaces left-to-right decoding with parallel iterative refinement, enabling global semantic planning and real-time control at inference.</li>
+            <li><strong>Hierarchical Logit Guidance.</strong> Control signals act on coarse semantic tokens during inference, allowing the desired behavior to change without updating model parameters.</li>
+            <li><strong>Validity-preserving refinement.</strong> Confidence-Aware Refinement and a Topology-Constrained Tree repair uncertain tokens and restrict decoding to valid Semantic ID paths.</li>
+            <li><strong>Evidence across utility and control.</strong> Experiments evaluate standard recommendation accuracy, accuracy-diversity trade-offs, component contributions, and sensitivity to guidance strength and refinement steps.</li>
+          </ul>
+          <ul class="contribution-list" data-lang-content="zh" hidden>
+            <li><strong>并行可控生成。</strong> ReGen 以并行迭代细化替代从左到右的解码，从而支持全局语义规划与推理阶段的实时控制。</li>
+            <li><strong>分层 Logit 引导。</strong> 控制信号在推理时作用于粗粒度语义 token，无需更新模型参数即可调整生成目标。</li>
+            <li><strong>保持有效性的细化机制。</strong> 置信度感知细化与拓扑约束树修复不确定 token，并将解码严格限制在有效语义 ID 路径内。</li>
+            <li><strong>同时评估效用与可控性。</strong> 实验覆盖标准推荐准确性、准确性-多样性权衡、核心组件贡献，以及引导强度与细化步数的敏感性。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="paper-section section-alt" id="motivation">
+        <div class="content-shell">
+          <div class="text-shell text-block">
+            <h2><span data-lang-label="en">Motivation</span><span data-lang-label="zh" hidden>研究动机</span></h2>
+            <div data-lang-content="en">
+              <p>Recommendation objectives can change while a system is serving users. A traveler may move from highly relevant hotels to more diverse local experiences, while a platform may shift from conversion to fairness or broader exposure. Re-training for every change is too slow and expensive.</p>
+              <p>Autoregressive Semantic ID generators make this harder because each prefix decision constrains all later tokens. Intervening after an early token has been selected can damage the identifier structure and produce codes that do not correspond to real catalog items. ReGen is designed to support inference-time control while preserving semantic coherence and validity.</p>
+            </div>
+            <div data-lang-content="zh" hidden>
+              <p>推荐系统的目标可能在服务过程中发生变化。例如，旅行者可能从高度相关的酒店转向更具多样性的本地体验；平台也可能从转化率转向公平性或更广泛的曝光。针对每次目标变化重新训练模型既缓慢又昂贵。</p>
+              <p>自回归语义 ID 生成器使这一问题更加突出，因为前缀中的每个决策都会约束后续 token。若在早期 token 已确定后强行干预，可能破坏 ID 结构，生成无法对应真实目录物品的编码。ReGen 的目标是在保持语义一致性和有效性的同时实现推理时控制。</p>
+            </div>
+          </div>
+          <figure class="paper-figure figure-medium">
+            <a href="./static/figures/motivation.pdf" target="_blank" rel="noopener" aria-label="Open the original motivation figure as PDF">
+              <img src="./static/figures/motivation.png" width="4000" height="2250" loading="lazy" decoding="async" alt="Dynamic user and platform objective shifts expose decision locking in autoregressive generative recommendation">
+            </a>
+            <figcaption>
+              <span data-lang-content="en"><strong>Figure 1.</strong> Conventional autoregressive generation locks in early token decisions. Dynamic objective changes would require slow fine-tuning or risk invalid Semantic IDs.</span>
+              <span data-lang-content="zh" hidden><strong>图 1。</strong> 传统自回归生成会锁定早期 token 决策；动态目标变化要么需要缓慢的微调，要么会带来无效语义 ID 的风险。</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="paper-section" id="method">
+        <div class="content-shell">
+          <div class="text-shell text-block">
+            <h2><span data-lang-label="en">Method</span><span data-lang-label="zh" hidden>方法</span></h2>
+            <div data-lang-content="en">
+              <p>ReGen combines a bidirectional mask-prediction backbone with training-free guidance, iterative token repair, and topology-constrained beam inference. The framework first predicts Semantic ID tokens in parallel, guides selected coarse tokens toward the control objective, revisits low-confidence positions, and finally retains only valid catalog paths before item-level ranking.</p>
+            </div>
+            <div data-lang-content="zh" hidden>
+              <p>ReGen 将双向掩码预测骨干与免训练引导、迭代 token 修复和拓扑约束 beam 推理相结合。框架首先并行预测语义 ID token，再引导选定的粗粒度 token 朝控制目标变化，随后重新预测低置信度位置，最后仅保留有效目录路径并完成物品级排序。</p>
+            </div>
+          </div>
+          <figure class="paper-figure figure-wide">
+            <a href="./static/figures/framework.pdf" target="_blank" rel="noopener" aria-label="Open the original ReGen framework figure as PDF">
+              <img src="./static/figures/framework.png" width="4000" height="2250" loading="lazy" decoding="async" alt="ReGen framework with controllable inference, parallel Semantic ID generation, and confidence-aware topology-constrained refinement">
+            </a>
+            <figcaption>
+              <span data-lang-content="en"><strong>Figure 2.</strong> ReGen combines controllable inference, parallel Semantic ID generation, and confidence-aware refinement with topology-constrained projection.</span>
+              <span data-lang-content="zh" hidden><strong>图 2。</strong> ReGen 由可控推理、并行语义 ID 生成，以及结合拓扑约束投影的置信度感知细化组成。</span>
+            </figcaption>
+          </figure>
+
+          <div class="method-details">
+            <section>
+              <div data-lang-content="en">
+                <h3>1. Parallel Semantic ID Generation</h3>
+                <p>A bidirectional Transformer treats the candidate Semantic ID as a mask-filling problem and predicts all token positions together. Residual-quantized codes provide a coarse-to-fine hierarchy in which earlier tokens capture broader semantics and later tokens preserve item detail.</p>
+              </div>
+              <div data-lang-content="zh" hidden>
+                <h3>1. 并行语义 ID 生成</h3>
+                <p>双向 Transformer 将候选语义 ID 建模为掩码填充问题，同时预测所有 token 位置。残差量化编码形成由粗到细的层次结构：早期 token 表示更高层语义，后期 token 保留物品细节。</p>
+              </div>
+            </section>
+            <section>
+              <div data-lang-content="en">
+                <h3>2. Hierarchical Logit Guidance</h3>
+                <p>At inference time, ReGen adjusts logits at selected coarse levels according to the requested control signal. For diversity control, frequent high-level semantics in the user's history receive a penalty. The intervention is lightweight and does not update the trained model.</p>
+              </div>
+              <div data-lang-content="zh" hidden>
+                <h3>2. 分层 Logit 引导</h3>
+                <p>在推理阶段，ReGen 根据指定控制信号调整选定粗粒度层的 logit。以多样性控制为例，用户历史中频繁出现的高层语义会受到惩罚。该干预轻量且无需更新已训练模型。</p>
+              </div>
+            </section>
+            <section>
+              <div data-lang-content="en">
+                <h3>3. Confidence-Aware Refinement</h3>
+                <p>After each parallel prediction, the model keeps reliable anchors and re-masks positions whose confidence falls below a round-specific threshold. Repeated prediction and correction restore fine-grained coherence when the control signal perturbs coarse semantics.</p>
+              </div>
+              <div data-lang-content="zh" hidden>
+                <h3>3. 置信度感知细化</h3>
+                <p>每轮并行预测后，模型保留可靠锚点，并重新掩码置信度低于轮次阈值的位置。反复的预测与修正可以在控制信号扰动粗粒度语义后恢复细粒度一致性。</p>
+              </div>
+            </section>
+            <section>
+              <div data-lang-content="en">
+                <h3>4. Topology-Constrained Beam Inference</h3>
+                <p>A tree built from catalog Semantic IDs masks token expansions that cannot lead to a real item. Beam inference retains multiple valid candidates; decoded IDs are then mapped to items, deduplicated, filtered against user history, and selected according to utility and category coverage.</p>
+              </div>
+              <div data-lang-content="zh" hidden>
+                <h3>4. 拓扑约束 Beam 推理</h3>
+                <p>由目录语义 ID 构建的树会屏蔽无法通向真实物品的 token 扩展。Beam 推理保留多个有效候选，随后将解码 ID 映射到物品，完成去重、历史过滤，并按照效用与类别覆盖率构建推荐列表。</p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section section-alt" id="experiments">
+        <div class="content-shell">
+          <div class="text-shell text-block">
+            <h2><span data-lang-label="en">Experiments</span><span data-lang-label="zh" hidden>实验</span></h2>
+            <div data-lang-content="en">
+              <p>We evaluate ReGen on the Musical Instruments, Industrial &amp; Scientific, and Video Games categories of the Amazon 2023 Review dataset. User interactions are ordered chronologically with the last item used for testing and the second-to-last for validation. The comparison includes discriminative, generative, and controllable recommenders. Ranking utility is measured by Recall and NDCG at 5 and 10, while controllability is measured by category coverage (Diversity).</p>
+            </div>
+            <div data-lang-content="zh" hidden>
+              <p>我们在 Amazon 2023 Review 数据集的 Musical Instruments、Industrial &amp; Scientific 和 Video Games 三个类别上评估 ReGen。用户交互按时间排序，最后一个物品用于测试，倒数第二个用于验证。对比方法包括判别式、生成式和可控推荐模型。排序效用采用 Recall 与 NDCG@5/10，可控性采用类别覆盖率（Diversity）衡量。</p>
+            </div>
+            <ul class="result-notes" data-lang-content="en">
+              <li><strong>Accuracy-oriented utility:</strong> ReGen obtains Recall@10 of 0.0646 on Instruments, 0.0491 on Scientific, and 0.0726 on Video Games. The paper positions this as a usable utility basis rather than a pure-accuracy superiority claim.</li>
+              <li><strong>Matched-diversity comparison:</strong> around Diversity@10 = 0.54 on Instruments, ReGen reaches Recall@10/NDCG@10 of 0.0398/0.0190, compared with 0.0351/0.0163 for TIGER-MMR and 0.0316/0.0167 for ComiRec.</li>
+              <li><strong>Validity:</strong> the full method maintains 99.97% valid Semantic IDs on Instruments and Scientific. Without topology constraints, validity falls to 27.63% and 29.76%, respectively.</li>
+              <li><strong>Convergence:</strong> performance stabilizes around four refinement steps, providing a practical trade-off between recommendation quality and inference cost.</li>
+            </ul>
+            <ul class="result-notes" data-lang-content="zh" hidden>
+              <li><strong>准确性配置下的效用：</strong>ReGen 在 Instruments、Scientific 和 Video Games 上的 Recall@10 分别为 0.0646、0.0491 和 0.0726。论文将其定位为可控推理的有效效用基础，而非纯准确性优势。</li>
+              <li><strong>相近多样性下的比较：</strong>在 Instruments 上 Diversity@10 约为 0.54 时，ReGen 的 Recall@10/NDCG@10 为 0.0398/0.0190，高于 TIGER-MMR 的 0.0351/0.0163 和 ComiRec 的 0.0316/0.0167。</li>
+              <li><strong>有效性：</strong>完整模型在 Instruments 和 Scientific 上均保持 99.97% 的有效语义 ID；移除拓扑约束后，有效率分别降至 27.63% 和 29.76%。</li>
+              <li><strong>收敛性：</strong>性能在约四轮细化后趋于稳定，在推荐质量和推理成本之间形成实用平衡。</li>
+            </ul>
+          </div>
+
+          <section class="experiment-block">
+            <h3><span data-lang-label="en">Accuracy-diversity trade-off</span><span data-lang-label="zh" hidden>准确性-多样性权衡</span></h3>
+            <p data-lang-content="en">ReGen guides generation directly in logit space instead of only re-ranking a fixed candidate set. Across the reported operating range, it retains more ranking utility as the requested diversity increases.</p>
+            <p data-lang-content="zh" hidden>ReGen 在 logit 空间中直接引导生成，而不仅是在固定候选集合上重新排序。在论文报告的工作区间内，随着目标多样性提高，ReGen 能保留更多排序效用。</p>
+            <div class="figure-grid">
+              <figure class="paper-figure figure-full">
+                <a href="./static/figures/pareto-instruments.pdf" target="_blank" rel="noopener" aria-label="Open the original Instruments Pareto figure as PDF">
+                  <img src="./static/figures/pareto-instruments.png" width="2585" height="851" loading="lazy" decoding="async" alt="Recall and NDCG versus Diversity at 10 on the Musical Instruments dataset">
+                </a>
+                <figcaption>
+                  <span data-lang-content="en"><strong>Instruments.</strong> Recall@10 and NDCG@10 versus Diversity@10 for ReGen and controllable baselines.</span>
+                  <span data-lang-content="zh" hidden><strong>Instruments。</strong>ReGen 与可控基线在不同 Diversity@10 下的 Recall@10 和 NDCG@10。</span>
+                </figcaption>
+              </figure>
+              <figure class="paper-figure figure-full">
+                <a href="./static/figures/pareto-scientific.pdf" target="_blank" rel="noopener" aria-label="Open the original Scientific Pareto figure as PDF">
+                  <img src="./static/figures/pareto-scientific.png" width="2585" height="864" loading="lazy" decoding="async" alt="Recall and NDCG versus Diversity at 10 on the Industrial and Scientific dataset">
+                </a>
+                <figcaption>
+                  <span data-lang-content="en"><strong>Scientific.</strong> ReGen maintains higher Recall@10 at comparable diversity levels among the controllable methods shown.</span>
+                  <span data-lang-content="zh" hidden><strong>Scientific。</strong>在图中所示的可控方法中，ReGen 在相近多样性水平下保持了更高的 Recall@10。</span>
+                </figcaption>
+              </figure>
+            </div>
+          </section>
+
+          <section class="experiment-block">
+            <h3><span data-lang-label="en">Component ablation</span><span data-lang-label="zh" hidden>组件消融</span></h3>
+            <p data-lang-content="en">Guidance raises diversity, refinement prevents the resulting utility collapse, and the topology constraint keeps generated identifiers inside the catalog. All variants below use the same controllability-oriented inference setting.</p>
+            <p data-lang-content="zh" hidden>引导机制提高多样性，细化机制避免由此造成的效用崩溃，拓扑约束则确保生成 ID 位于真实目录中。下表所有变体采用相同的可控推理配置。</p>
+            <div class="table-wrap">
+              <table class="result-table">
+                <caption>
+                  <span data-lang-content="en">Ablation results on Instruments and Scientific. R = Recall, D = Diversity, Val = valid generated Semantic IDs.</span>
+                  <span data-lang-content="zh" hidden>Instruments 与 Scientific 上的消融结果。R 表示 Recall，D 表示 Diversity，Val 表示生成语义 ID 的有效率。</span>
+                </caption>
+                <thead>
+                  <tr>
+                    <th rowspan="2" scope="col"><span data-lang-label="en">Variant</span><span data-lang-label="zh" hidden>变体</span></th>
+                    <th colspan="3" scope="colgroup">Instruments</th>
+                    <th colspan="3" scope="colgroup">Scientific</th>
+                  </tr>
+                  <tr>
+                    <th scope="col">R@10</th><th scope="col">D@10</th><th scope="col">Val@10</th>
+                    <th scope="col">R@10</th><th scope="col">D@10</th><th scope="col">Val@10</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><th scope="row">ReGen (Full)</th><td>0.0339</td><td>0.5606</td><td>99.97%</td><td>0.0414</td><td>0.5051</td><td>99.97%</td></tr>
+                  <tr><th scope="row">w/o Guidance</th><td>0.0355</td><td>0.4851</td><td>99.97%</td><td>0.0436</td><td>0.4644</td><td>99.97%</td></tr>
+                  <tr><th scope="row">w/o Refinement</th><td>0.0130</td><td>0.7321</td><td>99.97%</td><td>0.0267</td><td>0.7307</td><td>99.97%</td></tr>
+                  <tr><th scope="row">w/o Topology</th><td>0.0136</td><td>0.0001</td><td>27.63%</td><td>0.0315</td><td>0.0151</td><td>29.76%</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="experiment-block">
+            <h3><span data-lang-label="en">Parameter sensitivity and efficiency</span><span data-lang-label="zh" hidden>参数敏感性与效率</span></h3>
+            <p data-lang-content="en">Guidance strength controls the relevance-diversity balance. Moderate values provide a stable operating region, while excessive guidance eventually reduces recall. Refinement converges quickly, with four steps selected as a practical operating point.</p>
+            <p data-lang-content="zh" hidden>引导强度控制相关性与多样性的平衡。适中的取值形成稳定工作区间，过强引导最终会降低召回率。细化过程收敛较快，四轮被选为实用工作点。</p>
+            <figure class="paper-figure figure-full">
+              <a href="./static/figures/guidance-sensitivity.pdf" target="_blank" rel="noopener" aria-label="Open the original guidance sensitivity figure as PDF">
+                <img src="./static/figures/guidance-sensitivity.png" width="2951" height="791" loading="lazy" decoding="async" alt="Recall and Diversity sensitivity to guidance strength on three Amazon datasets">
+              </a>
+              <figcaption>
+                <span data-lang-content="en"><strong>Guidance strength.</strong> Increasing lambda raises Diversity@10, while overly strong guidance reduces Recall@10.</span>
+                <span data-lang-content="zh" hidden><strong>引导强度。</strong>提高 lambda 会提升 Diversity@10，但过强引导会降低 Recall@10。</span>
+              </figcaption>
+            </figure>
+            <figure class="paper-figure figure-full">
+              <a href="./static/figures/refinement-steps.pdf" target="_blank" rel="noopener" aria-label="Open the original refinement-step sensitivity figure as PDF">
+                <img src="./static/figures/refinement-steps.png" width="3251" height="860" loading="lazy" decoding="async" alt="Recall and Diversity sensitivity to the number of refinement steps on three Amazon datasets">
+              </a>
+              <figcaption>
+                <span data-lang-content="en"><strong>Refinement steps.</strong> Metrics stabilize around T = 4; further steps increase evaluation time with limited additional change.</span>
+                <span data-lang-content="zh" hidden><strong>细化步数。</strong>各项指标在 T = 4 左右趋于稳定；继续增加步数会提高评估时间，但指标变化有限。</span>
+              </figcaption>
+            </figure>
+          </section>
+        </div>
+      </section>
+
+      <section class="paper-section" id="citation">
+        <div class="content-shell">
+          <div class="section-title">
+            <h2>BibTeX</h2>
+            <p data-lang-content="en">This provisional entry reflects the accepted ICDM 2026 paper. DOI and page numbers will be added when the proceedings are available.</p>
+            <p data-lang-content="zh" hidden>以下为 ICDM 2026 已接收论文的临时条目；正式论文集发布后将补充 DOI 与页码。</p>
+          </div>
+          <div class="bibtex-panel">
+            <button class="copy-button" type="button" data-copy-bibtex data-en-label="Copy BibTeX" data-zh-label="复制 BibTeX">Copy BibTeX</button>
+            <pre id="bibtex"><code>@inproceedings{zhang2026regen,
+  title     = {Controllable Generative Recommendation via Guided Token Refinement},
+  author    = {Zhang, Haichao and Liang, Zhixuan and Zhang, Chong and Chen, Zixi and Wang, Wen and Wang, Jia},
+  booktitle = {2026 IEEE International Conference on Data Mining (ICDM)},
+  year      = {2026},
+  url       = {https://zhang-haichao.github.io/ReGen/}
+}</code></pre>
+            <p class="copy-status" data-copy-status aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="paper-section section-alt acknowledgements">
+        <div class="text-shell">
+          <div data-lang-content="en">
+            <h2>Acknowledgements</h2>
+            <p>This study was funded by the National Natural Science Foundation of China (Grant No. 72401232), the Natural Science Foundation of the Jiangsu Higher Educational Institution of China (Grant No. 23KJB520037), the XJTLU Research Development Fund (RDF-21-01-053), and Liaoning Liaohe Lab (Grant Nos. LLL24ZZ-02-01 and LLL24ZZ-02-02).</p>
+          </div>
+          <div data-lang-content="zh" hidden>
+            <h2>致谢</h2>
+            <p>本研究获得国家自然科学基金（项目号 72401232）、江苏省高等学校自然科学研究项目（项目号 23KJB520037）、西交利物浦大学 Research Development Fund（RDF-21-01-053）以及辽宁辽河实验室（项目号 LLL24ZZ-02-01、LLL24ZZ-02-02）的资助。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-shell">
+        <p><strong>ReGen</strong> &middot; Controllable Generative Recommendation &middot; ICDM 2026</p>
+        <p>
+          <span data-lang-content="en">Page structure adapted from the </span>
+          <span data-lang-content="zh" hidden>页面结构参考 </span>
+          <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>.
+        </p>
+      </div>
+    </footer>
+
+    <script src="./static/js/site.js" defer></script>
+  </body>
+</html>
